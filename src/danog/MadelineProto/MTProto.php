@@ -282,6 +282,7 @@ class MTProto
                         $this->notify_layer($chat);
                     }
                 } catch (\danog\MadelineProto\RPCErrorException $e) {
+					throw $e;
                 }
             }
         }

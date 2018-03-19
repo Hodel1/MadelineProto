@@ -471,6 +471,7 @@ trait ResponseHandler
                 } catch (\danog\MadelineProto\RPCErrorException $e) {
                     \danog\MadelineProto\Logger::log('Still did not get user in database, postponing update', \danog\MadelineProto\Logger::ERROR);
                     //$this->pending_updates[] = $updates;
+					throw $e;
                     break;
                 }
                 $update = ['_' => 'updateNewMessage', 'message' => $message, 'pts' => $updates['pts'], 'pts_count' => $updates['pts_count']];

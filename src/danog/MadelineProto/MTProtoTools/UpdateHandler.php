@@ -161,6 +161,7 @@ trait UpdateHandler
         } catch (\danog\MadelineProto\Exception $e) {
             return true;
         } catch (\danog\MadelineProto\RPCErrorException $e) {
+			throw $e;
             return true;
         }
         $message_id = $message['id'];
@@ -195,6 +196,7 @@ trait UpdateHandler
         } catch (\danog\MadelineProto\Exception $e) {
             return false;
         } catch (\danog\MadelineProto\RPCErrorException $e) {
+			throw $e;
             return false;
         } finally {
             $this->postpone_updates = false;
@@ -666,6 +668,7 @@ trait UpdateHandler
             } catch (\danog\MadelineProto\Exception $e) {
             } catch (\danog\MadelineProto\TL\Exception $e) {
             } catch (\danog\MadelineProto\RPCErrorException $e) {
+				throw $e;
             } catch (\danog\MadelineProto\SecurityException $e) {
             }
         }

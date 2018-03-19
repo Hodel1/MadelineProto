@@ -48,6 +48,7 @@ trait PeerHandler
                     \danog\MadelineProto\Logger::log($e->getMessage(), \danog\MadelineProto\Logger::WARNING);
                 } catch (\danog\MadelineProto\RPCErrorException $e) {
                     \danog\MadelineProto\Logger::log($e->getMessage(), \danog\MadelineProto\Logger::WARNING);
+					throw $e;
                 }
             }
         } finally {
@@ -69,6 +70,7 @@ trait PeerHandler
                             \danog\MadelineProto\Logger::log($e->getMessage(), \danog\MadelineProto\Logger::WARNING);
                         } catch (\danog\MadelineProto\RPCErrorException $e) {
                             \danog\MadelineProto\Logger::log($e->getMessage(), \danog\MadelineProto\Logger::WARNING);
+							throw $e;
                         }
                     }
                 }
@@ -88,6 +90,7 @@ trait PeerHandler
                                 \danog\MadelineProto\Logger::log($e->getMessage(), \danog\MadelineProto\Logger::WARNING);
                             } catch (\danog\MadelineProto\RPCErrorException $e) {
                                 \danog\MadelineProto\Logger::log($e->getMessage(), \danog\MadelineProto\Logger::WARNING);
+								throw $e;
                             }
                         }
                     }
@@ -119,6 +122,7 @@ trait PeerHandler
                                 \danog\MadelineProto\Logger::log($e->getMessage(), \danog\MadelineProto\Logger::WARNING);
                             } catch (\danog\MadelineProto\RPCErrorException $e) {
                                 \danog\MadelineProto\Logger::log($e->getMessage(), \danog\MadelineProto\Logger::WARNING);
+								throw $e;
                             }
                         }
                     }
@@ -138,6 +142,7 @@ trait PeerHandler
                                     \danog\MadelineProto\Logger::log($e->getMessage(), \danog\MadelineProto\Logger::WARNING);
                                 } catch (\danog\MadelineProto\RPCErrorException $e) {
                                     \danog\MadelineProto\Logger::log($e->getMessage(), \danog\MadelineProto\Logger::WARNING);
+									throw $e;
                                 }
                             }
                         }
@@ -158,6 +163,7 @@ trait PeerHandler
                             \danog\MadelineProto\Logger::log($e->getMessage(), \danog\MadelineProto\Logger::WARNING);
                         } catch (\danog\MadelineProto\RPCErrorException $e) {
                             \danog\MadelineProto\Logger::log($e->getMessage(), \danog\MadelineProto\Logger::WARNING);
+							throw $e;
                         }
                     }
                     break;
@@ -181,7 +187,7 @@ trait PeerHandler
             if ($e->rpc === 'CHANNEL_PRIVATE') {
                 return true;
             }
-
+			throw $e;
             return false;
         }
     }
@@ -738,7 +744,7 @@ trait PeerHandler
             $res = $this->method_call('contacts.resolveUsername', ['username' => str_replace('@', '', $username)], ['datacenter' => $this->datacenter->curdc]);
         } catch (\danog\MadelineProto\RPCErrorException $e) {
             \danog\MadelineProto\Logger::log('Username resolution failed with error '.$e->getMessage(), \danog\MadelineProto\Logger::ERROR);
-
+			throw $e;
             return false;
         }
         if ($res['_'] === 'contacts.resolvedPeer') {
